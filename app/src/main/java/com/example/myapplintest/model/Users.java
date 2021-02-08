@@ -1,12 +1,12 @@
 package com.example.myapplintest.model;
 
-import com.google.gson.JsonObject;
+import java.util.Map;
 
 public class Users {
     public int id;
     public String name;
     public String description;
-    public JsonObject products;
+    public Map<String, Product> products;
 
     public int getId() {
         return id;
@@ -32,11 +32,11 @@ public class Users {
         this.description = description;
     }
 
-    public JsonObject getProducts() {
+    public Map<String, Product> getProducts() {
         return products;
     }
 
-    public void setProducts(JsonObject products) {
+    public void setProducts(Map<String, Product> products) {
         this.products = products;
     }
 }
