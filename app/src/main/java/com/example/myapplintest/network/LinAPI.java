@@ -8,6 +8,8 @@ import retrofit2.http.GET;
 
 public interface LinAPI {
 
+    String URL_MAIN = "https://raw.githubusercontent.com";
+
     @GET("/linio-mobile-devs/linio-test-files/main/wishlist.json")
     Single<List<Users>> getUsers();
 }
