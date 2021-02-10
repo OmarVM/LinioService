@@ -59,8 +59,8 @@ public class NetworkListFavoritesImpl implements INetworkListFavorites, INetwork
                         //Service Collection
                         FavoritesCollection collection = new FavoritesCollection();
                         ArrayList<String> listUrls = new ArrayList<>();
-                        collection.setDescription(usersList.get(0).description);
 
+                        collection.setDescription(usersList.get(0).description);
                         for (Product product :usersList.get(0).products.values() ){
                             listUrls.add(product.image);
                         }
@@ -80,10 +80,12 @@ public class NetworkListFavoritesImpl implements INetworkListFavorites, INetwork
 
                         _mListCollection.setValue(listCollections);
 
-
+                        //Get all products from services
                         ArrayList<Product> mArr = new ArrayList<>();
-                        for(Product product: usersList.get(1).products.values()){
-                            mArr.add(product);
+                        for (Users users: usersList) {
+                            for (Product product : users.products.values()) {
+                                mArr.add(product);
+                            }
                         }
 
                         _mList.setValue(mArr);
