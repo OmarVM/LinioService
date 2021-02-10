@@ -11,43 +11,46 @@
         android:id="@+id/recycler_list_collections"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:background="@color/white_three"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/white_three"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white_two"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_list_collections"
-        android:background="@color/white_two">
+        app:layout_constraintTop_toBottomOf="@+id/recycler_list_collections">
 
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp">
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal">
 
             <TextView
-                android:text="@string/txt_all_my_favorites"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/txt_black"/>
+                android:text="@string/txt_all_my_favorites"
+                android:textColor="@color/txt_black" />
 
             <TextView
                 android:id="@+id/no_full_list_favorites"
-                android:text="()"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/txt_black"/>
+                android:text="()"
+                android:textColor="@color/txt_black" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
