@@ -1,9 +1,13 @@
 package com.example.myapplintest.model;
 
 public class Product {
-    public int id;
-    public String name;
-    public String image;
+    private int id;
+    private String name;
+    private String image;
+    private int linioPlusLevel;
+    private String conditionType;
+    private   Boolean freeShipping;
+    private Boolean imported;
 
     public int getId() {
         return id;
@@ -27,5 +31,37 @@ public class Product {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getLinioPlusLevel() {
+        return linioPlusLevel;
+    }
+
+    public void setLinioPlusLevel(int linioPlusLevel) {
+        this.linioPlusLevel = linioPlusLevel;
+    }
+
+    public String getConditionType() {
+        return conditionType;
+    }
+
+    public void setConditionType(String conditionType) {
+        this.conditionType = conditionType;
+    }
+
+    public Boolean getFreeShipping() {
+        return freeShipping;
+    }
+
+    public void setFreeShipping(Boolean freeShipping) {
+        this.freeShipping = freeShipping;
+    }
+
+    public Boolean getImported() {
+        return imported;
+    }
+
+    public void setImported(Boolean imported) {
+        this.imported = imported;
     }
 }

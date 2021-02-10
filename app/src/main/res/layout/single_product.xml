@@ -26,9 +26,41 @@
             android:elevation="3dp">
 
             <ImageView
+                android:id="@+id/fav_details_new"
+                android:src="@drawable/ic_nd_ic_new_30"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/fav_details_plus"
                 android:src="@drawable/ic_nd_ic_plus_30"
                 android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_height="30dp"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/fav_details_international"
+                android:src="@drawable/ic_nd_ic_international_30"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/fav_details_plus_48"
+                android:src="@drawable/ic_nd_ic_plus_48_30"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/fav_details_refurbished"
+                android:src="@drawable/ic_nd_ic_refurbished_30"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/fav_details_free_shipping"
+                android:src="@drawable/ic_nd_ic_free_shipping_30"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <ImageView

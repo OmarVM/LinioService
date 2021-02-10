@@ -62,7 +62,7 @@ public class NetworkListFavoritesImpl implements INetworkListFavorites, INetwork
                             newCollection.setDescription(user.description);
                             ArrayList<String> newListUrls = new ArrayList<>();
                             for (Product product: user.products.values()){
-                                newListUrls.add(product.image);
+                                newListUrls.add(product.getImage());
                             }
                             newCollection.setListImages(newListUrls);
                             listCollections.add(newCollection);
