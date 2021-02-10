@@ -56,26 +56,26 @@ public class NetworkListFavoritesImpl implements INetworkListFavorites, INetwork
                     public void onSuccess(@NonNull List<Users> usersList) {
                         ArrayList<FavoritesCollection> listCollections = new ArrayList<>();
 
-                        //Service Collection
-                        FavoritesCollection collection = new FavoritesCollection();
-                        ArrayList<String> listUrls = new ArrayList<>();
-
-                        collection.setDescription(usersList.get(0).description);
-                        for (Product product :usersList.get(0).products.values() ){
-                            listUrls.add(product.image);
+                        //Get all Collection
+                        for (Users user : usersList){
+                            FavoritesCollection newCollection = new FavoritesCollection();
+                            newCollection.setDescription(user.description);
+                            ArrayList<String> newListUrls = new ArrayList<>();
+                            for (Product product: user.products.values()){
+                                newListUrls.add(product.image);
+                            }
+                            newCollection.setListImages(newListUrls);
+                            listCollections.add(newCollection);
                         }
-                        collection.setListImages(listUrls);
 
                         //Empty collection
                         FavoritesCollection emptyCollection = new FavoritesCollection();
                         ArrayList<String> listUrlsEmpty = new ArrayList<>();
-                        emptyCollection.setDescription("New Collection");
+                        emptyCollection.setDescription("");
                         for (int j = 0; j<3; j++){
                             listUrlsEmpty.add("");
                         }
                         emptyCollection.setListImages(listUrlsEmpty);
-
-                        listCollections.add(collection);
                         listCollections.add(emptyCollection);
 
                         _mListCollection.setValue(listCollections);
@@ -87,7 +87,6 @@ public class NetworkListFavoritesImpl implements INetworkListFavorites, INetwork
                                 mArr.add(product);
                             }
                         }
-
                         _mList.setValue(mArr);
                     }
 

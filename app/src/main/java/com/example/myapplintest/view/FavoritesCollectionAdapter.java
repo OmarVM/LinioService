@@ -41,7 +41,7 @@ public class FavoritesCollectionAdapter extends RecyclerView.Adapter<FavoritesCo
     public void onBindViewHolder(@NonNull FavoritesCollectionViewHolder holder, int position) {
         FavoritesCollection favorite = mList.get(position);
         holder.description.setText(favorite.getDescription());
-        if (!favorite.getListImages().isEmpty()){
+        if (!favorite.getListImages().isEmpty() && !favorite.getDescription().isEmpty()){
             String noString = Integer.toString(favorite.getListImages().size());
             holder.noItems.setText(noString);
 
@@ -49,6 +49,7 @@ public class FavoritesCollectionAdapter extends RecyclerView.Adapter<FavoritesCo
                 downloadImages(favorite.getListImages().get(i), i, holder);
             }
         }else{
+            holder.description.setText("Add new Collection");
             holder.noItems.setText("0");
             holder.img_first.setImageResource(R.drawable.ic_favorite_placeholder);
             holder.img_second.setImageResource(R.drawable.ic_favorite_placeholder);
