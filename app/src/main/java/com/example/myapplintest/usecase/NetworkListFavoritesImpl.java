@@ -1,12 +1,12 @@
 package com.example.myapplintest.usecase;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.myapplintest.model.FavoritesCollection;
 import com.example.myapplintest.model.Product;
 import com.example.myapplintest.model.Users;
+import com.example.myapplintest.network.INetworkFavoritesCollection;
 import com.example.myapplintest.network.INetworkListFavorites;
 import com.example.myapplintest.network.LinAPI;
 
@@ -24,7 +24,11 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class NetworkListFavoritesImpl implements INetworkListFavorites {
+public class NetworkListFavoritesImpl implements INetworkListFavorites, INetworkFavoritesCollection {
+
+    public NetworkListFavoritesImpl() {
+        InitRequest();
+    }
 
     private CompositeDisposable _disposables = new CompositeDisposable();
     private Retrofit retrofit = new Retrofit.Builder()
@@ -36,10 +40,9 @@ public class NetworkListFavoritesImpl implements INetworkListFavorites {
     private LinAPI mService = retrofit.create(LinAPI.class);
     public Single<List<Users>> mListObservable = mService.getUsers();
     private MutableLiveData _mList = new MutableLiveData<List<Product>>();
+    private MutableLiveData _mListCollection = new MutableLiveData<List<FavoritesCollection>>();
 
-    @Override
-    public LiveData<List<Product>> getInfo() {
-        ArrayList<Product> mArr = new ArrayList<>();
+    private void InitRequest(){
         mListObservable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -51,20 +54,55 @@ public class NetworkListFavoritesImpl implements INetworkListFavorites {
 
                     @Override
                     public void onSuccess(@NonNull List<Users> usersList) {
-                        Log.d("OVM", "List -> " + usersList.get(0).products.toString());
-                        for(Product product: usersList.get(0).products.values()){
-                            mArr.add(product);
-                            Log.d("OVM", "List -> " + product.toString());
+                        ArrayList<FavoritesCollection> listCollections = new ArrayList<>();
+
+                        //Service Collection
+                        FavoritesCollection collection = new FavoritesCollection();
+                        ArrayList<String> listUrls = new ArrayList<>();
+                        collection.setDescription(usersList.get(0).description);
+
+                        for (Product product :usersList.get(0).products.values() ){
+                            listUrls.add(product.image);
                         }
+                        collection.setListImages(listUrls);
+
+                        //Empty collection
+                        FavoritesCollection emptyCollection = new FavoritesCollection();
+                        ArrayList<String> listUrlsEmpty = new ArrayList<>();
+                        emptyCollection.setDescription("New Collection");
+                        for (int j = 0; j<3; j++){
+                            listUrlsEmpty.add("");
+                        }
+                        emptyCollection.setListImages(listUrlsEmpty);
+
+                        listCollections.add(collection);
+                        listCollections.add(emptyCollection);
+
+                        _mListCollection.setValue(listCollections);
+
+
+                        ArrayList<Product> mArr = new ArrayList<>();
+                        for(Product product: usersList.get(1).products.values()){
+                            mArr.add(product);
+                        }
+
                         _mList.setValue(mArr);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.e("OVM", "List -> Error : " + e.getMessage());
                     }
                 });
 
+    }
+
+    @Override
+    public LiveData<List<Product>> getInfo() {
         return _mList;
+    }
+
+    @Override
+    public LiveData<List<FavoritesCollection>> getInfoCollection() {
+        return _mListCollection;
     }
 }
