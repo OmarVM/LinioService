@@ -3,10 +3,10 @@ package com.example.myapplintest.model;
 import java.util.Map;
 
 public class Users {
-    public int id;
-    public String name;
-    public String description;
-    public Map<String, Product> products;
+    private int id;
+    private String name;
+    private String description;
+    private Map<String, Product> products;
 
     public int getId() {
         return id;
