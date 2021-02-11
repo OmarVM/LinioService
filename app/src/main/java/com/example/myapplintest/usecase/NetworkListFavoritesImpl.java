@@ -19,7 +19,6 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleObserver;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -27,7 +26,6 @@ public class NetworkListFavoritesImpl implements INetworkListFavorites, INetwork
     private LinAPI mService;
     private MutableLiveData _mList = new MutableLiveData<List<Product>>();
     private MutableLiveData _mListCollection = new MutableLiveData<List<FavoritesCollection>>();
-    private CompositeDisposable _disposables = new CompositeDisposable();
 
     @Inject
     public NetworkListFavoritesImpl(LinAPI mService) {
@@ -43,7 +41,6 @@ public class NetworkListFavoritesImpl implements INetworkListFavorites, INetwork
                 .subscribe(new SingleObserver<List<Users>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
                     }
 
                     @Override
@@ -88,7 +85,6 @@ public class NetworkListFavoritesImpl implements INetworkListFavorites, INetwork
                     public void onError(@NonNull Throwable e) {
                     }
                 });
-
     }
 
     @Override
@@ -100,4 +96,6 @@ public class NetworkListFavoritesImpl implements INetworkListFavorites, INetwork
     public LiveData<List<FavoritesCollection>> getInfoCollection() {
         return _mListCollection;
     }
+
+
 }
