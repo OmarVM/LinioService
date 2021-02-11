@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Favoritos</string>
+    <string name="app_name">Favorites</string>
     <string name="collection_name">Collection Name</string>
     <string name="items_in_collection">15</string>
     <string name="txt_all_my_favorites">My Favorites</string>
     <string name="menu_txt_add_collection">Add new collection</string>
+    <string name="str_parenthesis_simbol">()</string>
 </resources>

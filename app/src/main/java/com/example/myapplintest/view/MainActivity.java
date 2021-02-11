@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         mViewModelFavorites.mList.observe(this, products -> {
             adapterFav.updateList((ArrayList<Product>) products);
-            String numberToString = " (" + Integer.toString(products.size()) + ")";
+            String numberToString = " (" + products.size() + ")";
             total_list_fav.setText(numberToString);
             ll_txt_products.setVisibility(View.VISIBLE);
             recyclerViewProducts.setVisibility(View.VISIBLE);

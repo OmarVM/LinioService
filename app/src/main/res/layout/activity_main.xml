@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
+            android:textStyle="bold"
             android:textAlignment="center" />
     </androidx.appcompat.widget.Toolbar>
 
@@ -74,6 +75,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
                         android:text="@string/txt_all_my_favorites"
                         android:textColor="@color/txt_black" />
 
@@ -81,7 +83,8 @@
                         android:id="@+id/no_full_list_favorites"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="()"
+                        android:textStyle="bold"
+                        android:text="@string/str_parenthesis_simbol"
                         android:textColor="@color/txt_black" />
                 </LinearLayout>
 

@@ -21,7 +21,7 @@ public class MainActivityTest {
     public ActivityScenarioRule rule = new ActivityScenarioRule<>(MainActivity.class);
 
     @Test
-    public void verifyNumberItemsIsShowing(){
-        Espresso.onView(withId(R.id.ll_txt_list_products)).check(matches(ViewMatchers.isDisplayed()));
+    public void verifyMenuItemIsShowing(){
+        Espresso.onView(withId(R.id.menu_add_collection)).check(matches(ViewMatchers.isDisplayed()));
     }
 }

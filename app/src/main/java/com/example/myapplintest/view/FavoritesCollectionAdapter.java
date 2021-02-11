@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplintest.R;
 import com.example.myapplintest.model.FavoritesCollection;
+import com.example.myapplintest.utils.Constants;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -49,8 +50,8 @@ public class FavoritesCollectionAdapter extends RecyclerView.Adapter<FavoritesCo
                 downloadImages(favorite.getListImages().get(i), i, holder);
             }
         }else{
-            holder.description.setText("Add new Collection");
-            holder.noItems.setText("0");
+            holder.description.setText(Constants.TXT_PLACEHOLDER_NEW_COLLECTION);
+            holder.noItems.setText(Constants.TXT_PLACEHOLDER_NUMBER_EMPTY_COLLECTION);
             holder.img_first.setImageResource(R.drawable.ic_favorite_placeholder);
             holder.img_second.setImageResource(R.drawable.ic_favorite_placeholder);
             holder.img_third.setImageResource(R.drawable.ic_favorite_placeholder);
