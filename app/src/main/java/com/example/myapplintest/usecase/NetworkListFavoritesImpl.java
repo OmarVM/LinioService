@@ -13,7 +13,8 @@ import com.example.myapplintest.network.LinAPI;
 import java.util.ArrayList;
 import java.util.List;
 
-import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
+import javax.inject.Inject;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Single;
@@ -21,28 +22,21 @@ import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkListFavoritesImpl implements INetworkListFavorites, INetworkFavoritesCollection {
+    private LinAPI mService;
+    private MutableLiveData _mList = new MutableLiveData<List<Product>>();
+    private MutableLiveData _mListCollection = new MutableLiveData<List<FavoritesCollection>>();
+    private CompositeDisposable _disposables = new CompositeDisposable();
 
-    public NetworkListFavoritesImpl() {
+    @Inject
+    public NetworkListFavoritesImpl(LinAPI mService) {
+        this.mService = mService;
         InitRequest();
     }
 
-    private CompositeDisposable _disposables = new CompositeDisposable();
-    private Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(LinAPI.URL_MAIN)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .build();
-
-    private LinAPI mService = retrofit.create(LinAPI.class);
-    public Single<List<Users>> mListObservable = mService.getUsers();
-    private MutableLiveData _mList = new MutableLiveData<List<Product>>();
-    private MutableLiveData _mListCollection = new MutableLiveData<List<FavoritesCollection>>();
-
     private void InitRequest(){
+        Single<List<Users>> mListObservable = mService.getUsers();
         mListObservable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -12,10 +12,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplintest.BaseApplication;
 import com.example.myapplintest.R;
 import com.example.myapplintest.model.FavoritesCollection;
 import com.example.myapplintest.model.Product;
-import com.example.myapplintest.viewmodel.ViewModel;
+import com.example.myapplintest.viewmodel.ViewModelFavorites;
 
 import java.util.ArrayList;
 
@@ -29,15 +30,18 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView total_list_fav;
 
+    private ViewModelFavorites mViewModelFavorites;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mViewModelFavorites = new ViewModelProvider(this).get(ViewModelFavorites.class);
+        BaseApplication.getAppComponent().inject(mViewModelFavorites);
+
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
-
-        ViewModel mViewModel = new ViewModelProvider(this).get(ViewModel.class);
 
         //List Collections
         recyclerViewCollections = findViewById(R.id.recycler_list_collections);
@@ -52,16 +56,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewProducts.setLayoutManager(new GridLayoutManager(this, 2));
 
         total_list_fav = findViewById(R.id.no_full_list_favorites);
-
-        mViewModel.mListCollections.observe(this, favoritesCollections -> {
-                adapterCollectionFav.updateList((ArrayList<FavoritesCollection>) favoritesCollections);
-                });
-
-        mViewModel.mList.observe(this, products -> {
-            adapterFav.updateList((ArrayList<Product>) products);
-            String numberToString = " (" + Integer.toString(products.size()) + ")";
-            total_list_fav.setText(numberToString);
-        });
     }
 
     @Override
@@ -69,5 +63,21 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mViewModelFavorites.startOperation();
+        mViewModelFavorites.mListCollections.observe(this, favoritesCollections -> {
+            adapterCollectionFav.updateList((ArrayList<FavoritesCollection>) favoritesCollections);
+        });
+
+        mViewModelFavorites.mList.observe(this, products -> {
+            adapterFav.updateList((ArrayList<Product>) products);
+            String numberToString = " (" + Integer.toString(products.size()) + ")";
+            total_list_fav.setText(numberToString);
+        });
     }
 }
